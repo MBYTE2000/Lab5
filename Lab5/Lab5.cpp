@@ -1,24 +1,29 @@
 ﻿#include <iostream>
+#include <math.h>
 using namespace std;
 
 int main()
 {
     setlocale(LC_ALL, "rus");
 
-    int n, firstNegative, sum = 0;
+    int n, firstNegative = -1, sum = 0;
     string s;
-    printf("Введите размер массива:");
+    cout << ("Введите размер массива:");
     cin >> n;
-    int* a = new int[n](); //подумать
+    int* a = new int[n]();
 
-   
+    cout << ("Введите test чтобы заполнить массив автоматическм или оставьте строку пустой\n");
     cin >> s;
+
+
 
     if (s == "test")
     {
+        srand(time(0));
         for (int i = 0; i < n; i++)
         {
-            a[i] = rand() % 10;
+            a[i] = 5 - rand() % 10;
+            cout << a[i] << "\n";
         }
     }
     else
@@ -39,9 +44,17 @@ int main()
             break;
         }
     }
-    for (int i = firstNegative+1; i < n; i++)
+   
+    if (firstNegative >= 0)
     {
-        sum += a[i];
+        for (int i = firstNegative + 1; i < n; i++)
+        {
+            sum += abs(a[i]);
+        }
+        cout << "sum = " << sum;
     }
-    cout << "sum = " << sum;
+    else
+    {
+        cout << "нет отрицательных чисел";
+    }
 }
